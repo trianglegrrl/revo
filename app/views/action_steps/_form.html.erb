@@ -1,0 +1,27 @@
+<%= form_with(model: action_step, local: true) do |form| %>
+  <% if action_step.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(action_step.errors.count, "error") %> prohibited this action_step from being saved:</h2>
+
+      <ul>
+      <% action_step.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<%= form_with(model: user_action_step, local: true) do |form| %>
+  <% if user_action_step.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_action_step.errors.count, "error") %> prohibited this user_action_step from being saved:</h2>
+
+      <ul>
+      <% user_action_step.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :action_step_id %>
+    <%= form.text_field :action_step_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active_date %>
+    <%= form.datetime_select :active_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiration_date %>
+    <%= form.datetime_select :expiration_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
