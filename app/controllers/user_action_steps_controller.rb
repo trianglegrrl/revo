@@ -1,10 +1,11 @@
 class UserActionStepsController < ApplicationController
-  before_action :set_user_action_step, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
+  before_action :set_user_action_step, only: [:show, :edit, :update, :destroy, :complete, :open]
 
   # GET /user_action_steps
   # GET /user_action_steps.json
   def index
-    @user_action_steps = UserActionStep.all
+    @user_action_steps = User.find(params[:user_id]).user_action_steps
   end
 
   # GET /user_action_steps/1
@@ -14,7 +15,7 @@ class UserActionStepsController < ApplicationController
 
   # GET /user_action_steps/new
   def new
-    @user_action_step = UserActionStep.new
+    @user_action_step = UserActionStep.new(user: @user)
   end
 
   # GET /user_action_steps/1/edit
@@ -61,10 +62,37 @@ class UserActionStepsController < ApplicationController
     end
   end
 
+  def open
+    respond_to do |format|
+      if @user_action_step.open!
+        format.html { redirect_to user_user_action_steps_url(@user), notice: 'User action step was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user_action_step }
+      else
+        format.html { render :edit }
+        format.json { render json: @user_action_step.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def complete
+    respond_to do |format|
+      if @user_action_step.complete!
+        format.html { redirect_to user_user_action_steps_url(@user), notice: 'User action step was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user_action_step }
+      else
+        format.html { render :edit }
+        format.json { render json: @user_action_step.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
+    def set_user
+      @user = User.find(params[:user_id]) if params[:user_id].present?
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_user_action_step
-      @user_action_step = UserActionStep.find(params[:id])
+      @user_action_step = UserActionStep.find(params[:id] || params[:user_action_step_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

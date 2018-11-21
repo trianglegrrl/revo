@@ -1,24 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
+<h1><%= @user.full_name %></h1>
 
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
 
-<p>
-  <strong>Public:</strong>
-  <%= @user.public %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<h2>This Week's Action Steps</h2>
+<ul>
+<% @user_action_steps.each do |uas| %>
+  <li>
+    <%= uas.name %>
+    -
+    <%= uas.active_date %>
+  </li>
+<% end %>
+</ul>

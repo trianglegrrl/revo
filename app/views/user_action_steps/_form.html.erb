@@ -1,4 +1,4 @@
-<%= form_with(model: user_action_step, local: true) do |form| %>
+<%= form_with(url: new_user_user_action_step_path(@user), model: user_action_step, local: true) do |form| %>
   <% if user_action_step.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user_action_step.errors.count, "error") %> prohibited this user_action_step from being saved:</h2>
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.hidden_field(:user_id, @user_action_step.user_id) %>
   </div>
 
   <div class="field">
