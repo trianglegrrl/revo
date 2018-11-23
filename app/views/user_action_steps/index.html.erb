@@ -14,7 +14,13 @@
   /
   <%= @user_action_steps.count %>
 </p>
-<table>
+<table class="table">
+	<thead>
+		<tr>
+			<th>&nbsp;</th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
   <tbody>
     <% @user_action_steps.current.each do |user_action_step| %>
       <tr>
