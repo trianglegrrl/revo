@@ -90,7 +90,7 @@ class UserActionStepsController < ApplicationController
     def set_user
       @user = User.find(params[:user_id]) if params[:user_id].present?
     end
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_user_action_step
       @user_action_step = UserActionStep.find(params[:id] || params[:user_action_step_id])
     end

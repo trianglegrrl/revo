@@ -28,7 +28,7 @@ class ActionStepsController < ApplicationController
 
     respond_to do |format|
       if @action_step.save
-        format.html { redirect_to @action_step, notice: 'Action step was successfully created.' }
+        format.html { redirect_to action_steps_path, notice: 'Action step was successfully created.' }
         format.json { render :show, status: :created, location: @action_step }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ActionStepsController < ApplicationController
   def update
     respond_to do |format|
       if @action_step.update(action_step_params)
-        format.html { redirect_to @action_step, notice: 'Action step was successfully updated.' }
+        format.html { redirect_to action_steps_path, notice: 'Action step was successfully updated.' }
         format.json { render :show, status: :ok, location: @action_step }
       else
         format.html { render :edit }

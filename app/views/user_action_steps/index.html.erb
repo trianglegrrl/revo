@@ -2,27 +2,32 @@
 
 <h1><%= @user.full_name %></h1>
 
+<p>
+  This week:
+  <%= @user_action_steps.current.completed.count %>
+  /
+  <%= @user_action_steps.current.count %>
+</p>
+<p>
+  All time:
+  <%= @user_action_steps.completed.count %>
+  /
+  <%= @user_action_steps.count %>
+</p>
 <table>
-  <thead>
-    <tr>
-      <th>Action steps</th>
-      <th></th>
-    </tr>
-  </thead>
-
   <tbody>
-    <% @user_action_steps.each do |user_action_step| %>
+    <% @user_action_steps.current.each do |user_action_step| %>
       <tr>
         <td><%= user_action_step.action_step.name %></td>
 
         <td class="action_steps">
           <% if user_action_step.open? %>
              <%= link_to(user_user_action_step_complete_path(user_action_step.user, user_action_step), method: :put, class: 'btn') do %>
-               <i class="fa fa-7x fa-check-circle"></i>
+               <i class="fa fa-7x fa-circle"></i>
              <% end %>
           <% else %>
              <%= link_to(user_user_action_step_open_path(user_action_step.user, user_action_step), method: :put, class: 'btn') do %>
-               <i class="fa fa-7x fa-circle"></i>
+               <i class="fa fa-7x fa-check-circle"></i>
              <% end %>
           <% end %>
         </td>
