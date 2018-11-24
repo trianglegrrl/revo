@@ -1,4 +1,5 @@
 class UserActionStepsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user
   before_action :set_user_action_step, only: [:show, :edit, :update, :destroy, :complete, :open]
 
