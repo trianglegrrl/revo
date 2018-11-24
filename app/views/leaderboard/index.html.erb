@@ -19,7 +19,7 @@
       <tr>
         <td><%= index + 1 %></td>
         <td><%= user.full_name %></td>
-        <td><%= user.user_action_steps.count %></td>
+        <td><%= user.user_action_steps.from_beginning.count %></td>
         <td><%= user.this_week_percentage %>%</td>
         <td><%= user.all_time_percentage %>%</td>
         <td><%= user.longest_streak %> workout<%= "s" if user.longest_streak > 1 %></td>

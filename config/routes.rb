@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :user_action_steps do
+      post 'new'
+      post 'create'
       put 'complete'
       put 'open'
     end

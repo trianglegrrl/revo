@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   has_many :user_action_steps
+
+  accepts_nested_attributes_for :user_action_steps
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -21,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def all_time_percentage
-    ((user_action_steps.completed.count.to_f / user_action_steps.count) * 100).round
+    ((user_action_steps.from_beginning.completed.count.to_f / user_action_steps.from_beginning.count) * 100).round
   rescue
     0
   end

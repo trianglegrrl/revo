@@ -2,5 +2,47 @@
 
 <%= render 'form', user: @user %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= render('action_steps',
+           title: "Current action steps",
+           date_format: "%a, %b %e, %Y",
+           show_state: true,
+           table_class: '',
+           show_active_expires: false,
+           show_top_separator: false,
+           show_bottom_separator: false,
+           user_action_steps: @user_action_steps.current.order(created_at: :desc)
+          )
+%>
+
+<%= render('action_steps',
+           title: "Upcoming action steps",
+           date_format: "%a, %b %e, %Y",
+           show_state: false,
+           table_class: '',
+           show_active_expires: true,
+           show_top_separator: true,
+           show_bottom_separator: false,
+           user_action_steps: @user_action_steps.future.order(created_at: :desc)
+          )
+%>
+
+<%= render('action_step_add_form',
+           title: nil,
+           date_format: "%a, %b %e, %Y",
+           show_top_separator: true,
+           show_bottom_separator: false,
+           user: @user
+          )
+%>
+
+<%= render('action_steps',
+           title: "Past action steps",
+           date_format: "%a, %b %e, %Y",
+           show_state: true,
+           table_class: 'table-dark',
+           show_active_expires: true,
+           show_top_separator: true,
+           show_bottom_separator: false,
+           user_action_steps: @user_action_steps.previous.order(created_at: :desc)
+          )
+%>

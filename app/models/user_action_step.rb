@@ -7,12 +7,18 @@ class UserActionStep < ApplicationRecord
   delegate :full_name, to: :user
   delegate :name, to: :action_step
 
+  validates_presence_of(:action_step_id, :active_date, :expiration_date)
+
   scope :previous, -> {
     where("expiration_date < ?", Time.now)
   }
 
   scope :current, -> {
     where("active_date < ? AND expiration_date > ?", Time.now, Time.now)
+  }
+
+  scope :from_beginning, -> {
+    where("active_date < ?", Time.now)
   }
 
   scope :future, -> {

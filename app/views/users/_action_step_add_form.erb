@@ -1,0 +1,54 @@
+<% if show_top_separator %><hr /><% end %>
+<h2>Add new action steps</h2>
+
+<%= form_with(url: user_user_action_steps_path(user), method: :post, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user_action_step from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Action steps</th>
+        <th>Active date</th>
+        <th>Expiration date</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="field">
+            <%= form.collection_select(:action_step_id, ActionStep.all.order(:name), :id, :name, { include_blank: false }, { required: true, multiple: true }) %>
+          </div>
+        </td>
+        <td>
+          <div class="field">
+             <%= datepicker_input(form, :active_date) %>
+          </div>
+        </td>
+        <td>
+            <div class="field">
+              <%= datepicker_input(form, :expiration_date) %>
+            </div>
+        </td>
+        <td>
+          <div class="actions">
+            <%= form.submit %>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<% if show_bottom_separator %><hr /><% end %>

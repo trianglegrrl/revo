@@ -1,0 +1,41 @@
+<% if show_top_separator %><hr /><% end %>
+<% if !title.blank? %> <h3><%= title %></h3><% end %>
+
+<% if user_action_steps.count > 0 %>
+
+  <table class="table <%= table_class %>">
+    <thead>
+      <tr>
+        <th>Action step</th>
+        <% if show_active_expires %>
+          <th>Active</th>
+          <th>Expires</th>
+      <% end %>
+        <% if show_state %><th>State</th><% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% user_action_steps.each do |uas| %>
+      <tr>
+        <td><%= uas.name %></td>
+        <% if show_active_expires %>
+          <td><%= uas.active_date.strftime(date_format) %></td>
+          <td><%= uas.expiration_date.strftime(date_format) %></td>
+      <% end %>
+        <% if show_state %>
+          <td>
+            <% if uas.open? %>
+              <i class="fa fa-7x fa-circle"></i>
+            <% else %>
+              <i class="fa fa-7x fa-check-circle"></i>
+            <% end  %>
+          </td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h4>None</h4>
+<% end %>
+<% if show_bottom_separator %><hr /><% end %>

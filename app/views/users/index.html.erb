@@ -11,10 +11,15 @@
     <% @users.each do |user| %>
       <tr>
         <td class="check_in_user_list">
-					<h2 class="display-4">
+					<h3 class="display-4">
 						<%= link_to user.full_name, user_user_action_steps_path(user) %>
-					</h2>
+					</h3>
 				</td>
+        <td>
+          <%= link_to(edit_user_path(user)) do %>
+            <i class="fa fa-7x fa-pencil"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

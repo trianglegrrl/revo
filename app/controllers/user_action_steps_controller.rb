@@ -25,16 +25,24 @@ class UserActionStepsController < ApplicationController
   # POST /user_action_steps
   # POST /user_action_steps.json
   def create
-    @user_action_step = UserActionStep.new(user_action_step_params)
+    params[:action_step_id].reject(&:blank?).each do |action_step|
+
+      as = ActionStep.find(action_step)
+      ad = Date.strptime(params[:active_date], "%m/%d/%Y")
+      ed = Date.strptime(params[:expiration_date], "%m/%d/%Y")
+
+      UserActionStep.where(user: @user, action_step: as, active_date: ad, expiration_date: ed).first_or_create!
+    end
 
     respond_to do |format|
-      if @user_action_step.save
-        format.html { redirect_to @user_action_step, notice: 'User action step was successfully created.' }
-        format.json { render :show, status: :created, location: @user_action_step }
-      else
-        format.html { render :new }
-        format.json { render json: @user_action_step.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to edit_user_path(@user), notice: 'User action step was successfully created.' }
+      format.json { render :show, status: :created, location: @user_action_step }
+    end
+  rescue => e
+    binding.pry
+    respond_to do |format|
+      format.html { redirect_to edit_user_path(@user), notice: 'Well shit.' }
+      format.json { render json: @user_action_step.errors, status: :unprocessable_entity }
     end
   end
 
