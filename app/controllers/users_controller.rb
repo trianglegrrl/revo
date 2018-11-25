@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
+  authorize_resource
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.order(:last_name, :first_name)
+    @users = User.all.clients.order(:last_name, :first_name)
   end
 
   # GET /users/1

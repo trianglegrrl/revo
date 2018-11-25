@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_24_042257) do
+ActiveRecord::Schema.define(version: 2018_11_24_152232) do
 
   create_table "action_steps", force: :cascade do |t|
     t.string "name"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2018_11_24_042257) do
     t.boolean "public"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
+    t.string "encrypted_password", default: ""
+    t.string "reset_password_token", default: ""
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
@@ -54,10 +54,22 @@ ActiveRecord::Schema.define(version: 2018_11_24_042257) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.string "encrypted_otp_secret"
+    t.string "encrypted_otp_secret_iv"
+    t.string "encrypted_otp_secret_salt"
+    t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login"
+    t.boolean "admin", default: false
+    t.boolean "coach", default: false
+    t.boolean "check_in", default: false
+    t.boolean "leaderboard", default: false
+    t.boolean "client", default: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["first_name"], name: "index_users_on_first_name", unique: true
-    t.index ["last_name"], name: "index_users_on_last_name", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["first_name"], name: "index_users_on_first_name"
+    t.index ["last_name"], name: "index_users_on_last_name"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
+    t.index ["unlock_token"], name: "index_users_on_unlock_token"
   end
 
 end

@@ -1,4 +1,6 @@
 class ActionStepsController < ApplicationController
+  authorize_resource
+
   before_action :set_action_step, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 

@@ -1,13 +1,20 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :trackable
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :validatable,
+         :lockable,
+         :confirmable,
+         :trackable
 
   has_many :user_action_steps
 
   accepts_nested_attributes_for :user_action_steps
+
+  scope :clients, -> {
+    where(client: true)
+  }
 
   def full_name
     "#{first_name} #{last_name}"
@@ -40,4 +47,10 @@ class User < ApplicationRecord
   rescue
     0
   end
+
+  protected
+
+	def confirmation_required?
+		false
+	end
 end
