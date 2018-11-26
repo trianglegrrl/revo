@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.clients.order(:last_name, :first_name)
+    @users = User.all.order(:last_name, :first_name)
   end
 
   # GET /users/1
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_user
       @user = User.find(params[:id])
 

@@ -1,5 +1,4 @@
 class UserActionStepsController < ApplicationController
-  authorize_resource
   before_action :authenticate_user!
   before_action :set_user
   before_action :set_user_action_step, only: [:show, :edit, :update, :destroy, :complete, :open]
@@ -7,7 +6,7 @@ class UserActionStepsController < ApplicationController
   # GET /user_action_steps
   # GET /user_action_steps.json
   def index
-    @user_action_steps = User.find(params[:user_id]).user_action_steps
+    @user_action_steps = User.find(params[:user_id]).user_action_steps.order(status: :desc)
   end
 
   # GET /user_action_steps/1
@@ -41,7 +40,6 @@ class UserActionStepsController < ApplicationController
       format.json { render :show, status: :created, location: @user_action_step }
     end
   rescue => e
-    binding.pry
     respond_to do |format|
       format.html { redirect_to edit_user_path(@user), notice: 'Well shit.' }
       format.json { render json: @user_action_step.errors, status: :unprocessable_entity }
@@ -85,6 +83,7 @@ class UserActionStepsController < ApplicationController
   end
 
   def complete
+		authorize! :complete, UserActionStep
     respond_to do |format|
       if @user_action_step.complete!
         format.html { redirect_to user_user_action_steps_url(@user), notice: 'User action step was successfully updated.' }

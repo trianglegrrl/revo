@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :leaderboard, only: :index
 
+	resources :check_in, only: %w[index show]
+
   resources :users do
     resources :user_action_steps do
       post 'new'

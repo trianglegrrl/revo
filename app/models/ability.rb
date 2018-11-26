@@ -2,8 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :read, :all
-
     return if user.blank?
 
     if user.admin?
@@ -20,13 +18,16 @@ class Ability
   end
 
   def admin
-    can [:update, :read], :User
+    can :manage, :all
   end
 
   def coach
   end
 
   def check_in
+		can [:update], UserActionStep
+		can :complete, UserActionStep
+		can :read, User
   end
 
   def leaderboard

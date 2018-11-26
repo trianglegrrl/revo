@@ -14,31 +14,26 @@
   /
   <%= @user_action_steps.count %>
 </p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>&nbsp;</th>
-			<th>&nbsp;</th>
-		</tr>
-	</thead>
-  <tbody>
-    <% @user_action_steps.current.each do |user_action_step| %>
-      <tr>
-        <td><%= user_action_step.action_step.name %></td>
 
-        <td class="action_steps">
-          <% if user_action_step.open? %>
-             <%= link_to(user_user_action_step_complete_path(user_action_step.user, user_action_step), method: :put, class: 'btn') do %>
-               <i class="fa fa-7x fa-circle"></i>
-             <% end %>
-          <% else %>
-             <%= link_to(user_user_action_step_open_path(user_action_step.user, user_action_step), method: :put, class: 'btn') do %>
-               <i class="fa fa-7x fa-check-circle"></i>
-             <% end %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="card-group">
+  <% @user_action_steps.current.each do |user_action_step| %>
+  <div class="card mb-3 text-center bg-<%= user_action_step.open? ? "success" : "secondary" %>">
+      <div class="card-body">
+        <h5 css="card-title"><%= user_action_step.action_step.name %></h5>
+        <h1>
+        <% if user_action_step.open? %>
+           <%= link_to(user_user_action_step_complete_path(user_action_step.user, user_action_step), method: :put, class: 'btn') do %>
+             <i class="fa fa-7x  fa-circle-o"></i>
+           <% end %>
+        <% else %>
+           <%= link_to(user_user_action_step_open_path(user_action_step.user, user_action_step), method: :put, class: 'btn') do %>
+             <i class="fa fa-lg fa-check-circle-o"></i>
+           <% end %>
+        <% end %>
+        </h1>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
 
