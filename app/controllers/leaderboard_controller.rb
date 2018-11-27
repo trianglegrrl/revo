@@ -1,7 +1,7 @@
 class LeaderboardController < ApplicationController
-  authorize_resource
   before_action :authenticate_user!
   def index
-    @users = User.all.sort_by(&:all_time_percentage).reverse
+    @users = User.clients.sort_by(&:all_time_percentage).reverse
+		authorize! :read, User
   end
 end

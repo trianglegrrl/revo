@@ -19,6 +19,8 @@ class Ability
 
   def admin
     can :manage, :all
+		can :administer_users, :all
+		can :leaderboard, :all
   end
 
   def coach
@@ -31,7 +33,9 @@ class Ability
   end
 
   def leaderboard
-    can :leaderboard
+    can :leaderboard, :all
+		can :read, UserActionStep
+		can :read, User
   end
 
   def client
