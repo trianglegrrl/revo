@@ -27,12 +27,11 @@ class UserActionStepsController < ApplicationController
   # POST /user_action_steps
   # POST /user_action_steps.json
   def create
-        authorize! :create, UserActionStep
+    authorize! :create, UserActionStep
     params[:action_step_id].reject(&:blank?).each do |action_step|
-
       as = ActionStep.find(action_step)
-      ad = Date.strptime(params[:active_date], "%m/%d/%Y")
-      ed = Date.strptime(params[:expiration_date], "%m/%d/%Y")
+      ad = params[:active_date]
+      ed = params[:expiration_date]
 
       UserActionStep.where(user: @user, action_step: as, active_date: ad, expiration_date: ed).first_or_create!
     end
@@ -51,7 +50,7 @@ class UserActionStepsController < ApplicationController
   # PATCH/PUT /user_action_steps/1
   # PATCH/PUT /user_action_steps/1.json
   def update
-        authorize! :update, @user_action_step
+    authorize! :update, @user_action_step
     respond_to do |format|
       if @user_action_step.update(user_action_step_params)
         format.html { redirect_to @user_action_step, notice: 'User action step was successfully updated.' }
@@ -66,7 +65,7 @@ class UserActionStepsController < ApplicationController
   # DELETE /user_action_steps/1
   # DELETE /user_action_steps/1.json
   def destroy
-        authorize! :destroy, @user_action_step
+    authorize! :destroy, @user_action_step
     @user_action_step.destroy
     respond_to do |format|
       format.html { redirect_to user_action_steps_url, notice: 'User action step was successfully destroyed.' }
@@ -75,7 +74,7 @@ class UserActionStepsController < ApplicationController
   end
 
   def open
-        authorize! :open, UserActionStep
+    authorize! :open, UserActionStep
     respond_to do |format|
       if @user_action_step.open!
         format.html { redirect_to user_user_action_steps_url(@user), notice: 'User action step was successfully updated.' }
@@ -88,7 +87,7 @@ class UserActionStepsController < ApplicationController
   end
 
   def complete
-        authorize! :complete, UserActionStep
+    authorize! :complete, UserActionStep
     respond_to do |format|
       if @user_action_step.complete!
         format.html { redirect_to user_user_action_steps_url(@user), notice: 'User action step was successfully updated.' }

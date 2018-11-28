@@ -1,48 +1,61 @@
 <h1>Editing User</h1>
 
-<%= render 'form', user: @user %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render 'form', user: @user %>
+    </div>
+    <div class="col">
+      <%= render('action_step_add_form',
+                 title: nil,
+                 date_format: "%a, %b %e, %Y",
+                 show_top_separator: false,
+                 show_bottom_separator: false,
+                 user: @user
+                )
+      %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= render('action_steps',
+                 title: "Current action steps",
+                 date_format: "%a, %b %e, %Y",
+                 show_state: true,
+                 table_class: 'current',
+                 show_active_expires: false,
+                 show_top_separator: false,
+                 show_bottom_separator: false,
+                 user_action_steps: @user_action_steps.current.order(created_at: :desc)
+                )
+      %>
+    </div>
+    <div class="col">
+      <%= render('action_steps',
+                 title: "Upcoming action steps",
+                 date_format: "%a, %b %e, %Y",
+                 show_state: false,
+                 table_class: 'future',
+                 show_active_expires: true,
+                 show_top_separator: false,
+                 show_bottom_separator: false,
+                 user_action_steps: @user_action_steps.future.order(created_at: :desc)
+                )
+      %>
+    </div>
+    <div class="col">
 
-<%= render('action_steps',
-           title: "Current action steps",
-           date_format: "%a, %b %e, %Y",
-           show_state: true,
-           table_class: 'current',
-           show_active_expires: false,
-           show_top_separator: false,
-           show_bottom_separator: false,
-           user_action_steps: @user_action_steps.current.order(created_at: :desc)
-          )
-%>
-
-<%= render('action_steps',
-           title: "Upcoming action steps",
-           date_format: "%a, %b %e, %Y",
-           show_state: false,
-           table_class: 'future',
-           show_active_expires: true,
-           show_top_separator: true,
-           show_bottom_separator: false,
-           user_action_steps: @user_action_steps.future.order(created_at: :desc)
-          )
-%>
-
-<%= render('action_step_add_form',
-           title: nil,
-           date_format: "%a, %b %e, %Y",
-           show_top_separator: true,
-           show_bottom_separator: false,
-           user: @user
-          )
-%>
-
-<%= render('action_steps',
-           title: "Past action steps",
-           date_format: "%a, %b %e, %Y",
-           show_state: true,
-           table_class: 'table-dark past',
-           show_active_expires: true,
-           show_top_separator: true,
-           show_bottom_separator: false,
-           user_action_steps: @user_action_steps.previous.order(created_at: :desc)
-          )
-%>
+      <%= render('action_steps',
+                 title: "Past action steps",
+                 date_format: "%a, %b %e, %Y",
+                 show_state: true,
+                 table_class: 'table-dark past',
+                 show_active_expires: true,
+                 show_top_separator: false,
+                 show_bottom_separator: false,
+                 user_action_steps: @user_action_steps.previous.order(created_at: :desc)
+                )
+      %>
+    </div>
+  </div>
+</div>

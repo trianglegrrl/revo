@@ -7,18 +7,27 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @action_steps.each do |action_step| %>
       <tr>
-        <td><%= action_step.name %></td>
-        <td><%= action_step.description %></td>
-        <td><%= link_to 'Show', action_step %></td>
-        <td><%= link_to 'Edit', edit_action_step_path(action_step) %></td>
-        <td><%= link_to 'Destroy', action_step, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to(action_step.name, edit_action_step_path(action_step)) %></td>
+        <td><%= link_to(action_step.description, edit_action_step_path(action_step)) %></td>
+        <td>
+          <%= link_to(edit_action_step_path(action_step)) do %>
+            <i class="fa fa-pencil fa-7x"></i>
+          <% end %>
+        </td>
+        <td>
+          <% if(action_step.user_action_steps.count == 0) %>
+            <%= link_to(action_step_path(action_step), method: :delete, data: { confirm: 'Are you sure?' }) do %>
+              <i class="fa fa-ban fa-7x"></i>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
