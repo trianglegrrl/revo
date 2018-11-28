@@ -7,3 +7,7 @@ strength_1:
 strength_2:
   name: Strength 2
   description: Strength 2 description
+
+hict:
+  name: HICT
+  description: HICT description
