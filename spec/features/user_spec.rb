@@ -32,6 +32,21 @@ RSpec.feature "Admin", type: :feature do
 
       click_link("client client")
 
+      find('#user_first_name').fill_in(with: 'Spackle')
+      find('#user_last_name').fill_in(with: 'Grackle')
+      find('#user_email').fill_in(with: 'spackle@grackle.com')
+
+      click_button("Update User")
+
+      expect(page).to have_text("Spackle Grackle")
+      expect(page).to have_text("spackle@grackle.com")
+    end
+
+    it "lets me add a current action step" do
+      visit "/users"
+
+      click_link("client client")
+
       select("HICT", from: "action_step_id[]")
       fill_in('active_date', with: 1.day.ago.strftime("%m/%d/%Y"))
       fill_in('expiration_date', with: 1.week.from_now.strftime("%m/%d/%Y"))
