@@ -66,12 +66,12 @@
     <!-- Begin page content -->
     <main role="main" class="container">
       <% unless notice.blank? %>
-        <p class="alert alert-primary"><%= notice %> </p><% end
-      %>
+        <p class="alert alert-primary"><%= notice %> </p>
+			<% end %>
       <% unless alert.blank? %>
         <p class="alert alert-danger"><%= alert %> </p>
       <% end %>
-            <%= yield %>
+       <%= yield %>
     </main>
 
     <footer class="footer">
