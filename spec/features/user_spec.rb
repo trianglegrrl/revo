@@ -48,8 +48,8 @@ RSpec.feature "Admin", type: :feature do
       click_link("client client")
 
       select("HICT", from: "action_step_id[]")
-      fill_in('active_date', with: 1.day.ago.strftime("%m/%d/%Y"))
-      fill_in('expiration_date', with: 1.week.from_now.strftime("%m/%d/%Y"))
+      fill_in('active_date', with: 1.day.ago.strftime("%Y-%m-%d"))
+      fill_in('expiration_date', with: 1.week.from_now.strftime("%Y-%m-%d"))
 
       click_button("Save")
 
@@ -62,8 +62,8 @@ RSpec.feature "Admin", type: :feature do
       click_link("client client")
 
       select("HICT", from: "action_step_id[]")
-      fill_in('active_date', with: 1.week.from_now.strftime("%m/%d/%Y"))
-      fill_in('expiration_date', with: 2.weeks.from_now.strftime("%m/%d/%Y"))
+      fill_in('active_date', with: 1.week.from_now.strftime("%Y-%m-%d"))
+      fill_in('expiration_date', with: 2.weeks.from_now.strftime("%Y-%m-%d"))
 
       click_button("Save")
 
@@ -76,8 +76,8 @@ RSpec.feature "Admin", type: :feature do
       click_link("client client")
 
       select("HICT", from: "action_step_id[]")
-      fill_in('active_date', with: 3.weeks.ago.strftime("%m/%d/%Y"))
-      fill_in('expiration_date', with: 2.weeks.ago.strftime("%m/%d/%Y"))
+      fill_in('active_date', with: 3.weeks.ago.strftime("%Y-%m-%d"))
+      fill_in('expiration_date', with: 2.weeks.ago.strftime("%Y-%m-%d"))
 
       click_button("Save")
 
