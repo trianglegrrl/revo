@@ -1,5 +1,5 @@
 <div class="alert alert-primary" role="alert" id="notice">
-	<%= notice %>
+    <%= notice %>
 </div>
 <div class="checkin-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-3">Mangage users</h1>
@@ -10,10 +10,10 @@
     <% @users.each do |user| %>
       <tr>
         <td class="check_in_user_list">
-					<h3 class="display-4">
-						<%= link_to user.full_name, edit_user_path(user) %>
-					</h3>
-				</td>
+                    <h3 class="display-4">
+                        <%= link_to user.full_name, edit_user_path(user) %>
+                    </h3>
+                </td>
         <td>
           <%= link_to(edit_user_path(user)) do %>
             <i class="fa fa-lg fa-pencil"></i>

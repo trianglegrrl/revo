@@ -66,10 +66,10 @@ class UsersController < ApplicationController
 
   private
 
-		def verify_admin
-			# Only allow access to this controller if they're an admin
-			head :unauthorized unless can?(:administer_users, :all)
-		end
+        def verify_admin
+            # Only allow access to this controller if they're an admin
+            head :unauthorized unless can?(:administer_users, :all)
+        end
 
     def set_user
       @user = User.find(params[:id])

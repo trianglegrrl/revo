@@ -4,12 +4,12 @@ class CheckInController < ApplicationController
 
   def index
     @users = User.all.clients.order(:last_name, :first_name)
-		authorize! :read, User
+        authorize! :read, User
   end
 
-	def show
-		authorize! :update, @user
-	end
+    def show
+        authorize! :update, @user
+    end
 
   private
 
