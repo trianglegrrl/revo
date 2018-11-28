@@ -27,7 +27,7 @@ class Ability
   end
 
   def check_in
-		can [:update], UserActionStep
+		can [:update, :complete, :read, :open], UserActionStep
 		can :complete, UserActionStep
 		can :read, User
   end

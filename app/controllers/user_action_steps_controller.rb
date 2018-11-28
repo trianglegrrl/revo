@@ -6,6 +6,7 @@ class UserActionStepsController < ApplicationController
   # GET /user_action_steps
   # GET /user_action_steps.json
   def index
+		authorize! :read, UserActionStep
     @user_action_steps = User.find(params[:user_id]).user_action_steps.order(status: :desc)
   end
 
@@ -26,6 +27,7 @@ class UserActionStepsController < ApplicationController
   # POST /user_action_steps
   # POST /user_action_steps.json
   def create
+		authorize! :create, UserActionStep
     params[:action_step_id].reject(&:blank?).each do |action_step|
 
       as = ActionStep.find(action_step)
@@ -49,6 +51,7 @@ class UserActionStepsController < ApplicationController
   # PATCH/PUT /user_action_steps/1
   # PATCH/PUT /user_action_steps/1.json
   def update
+		authorize! :update, @user_action_step
     respond_to do |format|
       if @user_action_step.update(user_action_step_params)
         format.html { redirect_to @user_action_step, notice: 'User action step was successfully updated.' }
@@ -63,6 +66,7 @@ class UserActionStepsController < ApplicationController
   # DELETE /user_action_steps/1
   # DELETE /user_action_steps/1.json
   def destroy
+		authorize! :destroy, @user_action_step
     @user_action_step.destroy
     respond_to do |format|
       format.html { redirect_to user_action_steps_url, notice: 'User action step was successfully destroyed.' }
@@ -71,6 +75,7 @@ class UserActionStepsController < ApplicationController
   end
 
   def open
+		authorize! :open, UserActionStep
     respond_to do |format|
       if @user_action_step.open!
         format.html { redirect_to user_user_action_steps_url(@user), notice: 'User action step was successfully updated.' }
@@ -106,6 +111,6 @@ class UserActionStepsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_action_step_params
-      params.require(:user_action_step).permit(:user_id, :action_step_id, :active_date, :expiration_date, :status)
+      params.permit(:user_id, :action_step_id, :active_date, :expiration_date, :status)
     end
 end

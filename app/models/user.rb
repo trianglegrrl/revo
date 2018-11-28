@@ -5,7 +5,6 @@ class User < ApplicationRecord
          :rememberable,
          :validatable,
          :lockable,
-         :confirmable,
          :trackable
 
   has_many :user_action_steps

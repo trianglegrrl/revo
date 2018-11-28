@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+strength_1:
+  user: client
+  action_step: strength_1
+  active_date: <%= 3.weeks.ago %>
+  expiration_date: <%= 2.weeks.ago %>
+  status: completed
+
+strength_1b:
+  user: client
+  action_step: strength_1
+  active_date: <%= 1.day.ago %>
+  expiration_date: <%= 1.week.from_now %>
+  status: completed
+
+strength_2:
+  user: client
+  action_step: strength_2
+  active_date: <%= 1.day.ago %>
+  expiration_date: <%= 1.week.from_now %>
+  status: open

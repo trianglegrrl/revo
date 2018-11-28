@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+strength_1:
+  name: Strength 1
+  description: Strength 1 description
+
+strength_2:
+  name: Strength 2
+  description: Strength 2 description
