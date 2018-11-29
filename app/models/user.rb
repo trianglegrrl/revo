@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   devise :database_authenticatable,
-         :registerable,
          :recoverable,
          :rememberable,
          :validatable,
@@ -19,11 +18,15 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def current_streak
+    user_action_steps.order(created_at: :desc).index(&:open?)
+  end
+
   def longest_streak
-    longest = 1
+    longest = 0
     counter = 1
 
-    user_action_steps.order(:created_at).each_with_index do |uas, index|
+    user_action_steps.order(created_at: :desc).each_with_index do |uas, index|
       if uas.open?
         longest = counter if counter > longest
         counter = 1

@@ -77,7 +77,12 @@ class UserActionStepsController < ApplicationController
     authorize! :open, UserActionStep
     respond_to do |format|
       if @user_action_step.open!
-        format.html { redirect_to user_user_action_steps_url(@user), notice: 'User action step was successfully updated.' }
+        if (current_user.check_in?)
+          redirect = check_in_index_url
+        else
+          redirect = users_path
+        end
+        format.html { redirect_to redirect, notice: 'Updated!' }
         format.json { render :show, status: :ok, location: @user_action_step }
       else
         format.html { render :edit }
@@ -90,7 +95,13 @@ class UserActionStepsController < ApplicationController
     authorize! :complete, UserActionStep
     respond_to do |format|
       if @user_action_step.complete!
-        format.html { redirect_to user_user_action_steps_url(@user), notice: 'User action step was successfully updated.' }
+        if (current_user.check_in?)
+          redirect = check_in_index_url
+        else
+          redirect = users_path
+        end
+
+        format.html { redirect_to redirect, notice: "Great work, #{@user_action_step.user.first_name}!" }
         format.json { render :show, status: :ok, location: @user_action_step }
       else
         format.html { render :edit }

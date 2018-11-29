@@ -28,7 +28,7 @@
       <tr>
         <td>
           <div class="field">
-            <%= form.collection_select(:action_step_id, ActionStep.all.order(:name), :id, :name, { include_blank: false }, { required: true, multiple: true }) %>
+            <%= form.collection_select(:action_step_id, ActionStep.all.order(:name), :id, :name, { include_blank: false }, { class: 'form-control', required: true, multiple: true }) %>
           </div>
         </td>
         <td>
@@ -43,7 +43,7 @@
         </td>
         <td>
           <div class="actions">
-            <%= form.submit %>
+            <%= form.submit class: 'btn btn-outline-primary' %>
           </div>
         </td>
       </tr>

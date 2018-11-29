@@ -36,7 +36,7 @@ RSpec.feature "CheckIns", type: :feature do
 
       find(".open-step").click
 
-      expect(page).to have_selector(".closed-step", count: 2)
+      expect(find('.alert')).to have_text("Great work, client!")
     end
 
     it "lets me uncheck an action step as a client" do
@@ -50,7 +50,7 @@ RSpec.feature "CheckIns", type: :feature do
 
       find(".closed-step").click
 
-      expect(page).to have_selector(".open-step", count: 2)
+      expect(find('.alert')).to have_text("Updated")
     end
   end
 end

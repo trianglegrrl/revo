@@ -9,6 +9,7 @@
         <th>Total</th>
         <th>This week</th>
         <th>All time</th>
+        <th>Current streak</th>
         <th>Longest streak</th>
       </tr>
   </thead>
@@ -20,7 +21,8 @@
         <td class="step-count"><%= user.user_action_steps.from_beginning.count %></td>
         <td class="this-week"><%= user.this_week_percentage %>%</td>
         <td class="all-time"><%= user.all_time_percentage %>%</td>
-        <td class="longest-streak"><%= user.longest_streak %> workout<%= "s" if user.longest_streak > 1 %></td>
+        <td class="current-streak"><%= user.current_streak %> <%= 'workout'.pluralize(user.current_streak) %></td>
+        <td class="longest-streak"><%= user.longest_streak %> <%= 'workout'.pluralize(user.longest_streak) %></td>
       </tr>
     <% end %>
   </tbody>
