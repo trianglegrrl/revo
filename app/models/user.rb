@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :trackable
 
   has_many :user_action_steps
+  has_many :default_user_action_steps
 
   accepts_nested_attributes_for :user_action_steps
 

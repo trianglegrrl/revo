@@ -17,6 +17,13 @@ Rails.application.routes.draw do
     resources :check_in, only: %w[index show]
 
   resources :users do
+    resources :default_user_action_steps do
+      post 'new'
+      post 'create'
+      put 'complete'
+      put 'open'
+    end
+
     resources :user_action_steps do
       post 'new'
       post 'create'
