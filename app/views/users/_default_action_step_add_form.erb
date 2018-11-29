@@ -1,0 +1,49 @@
+<% if show_top_separator %><hr /><% end %>
+<h2>Add new default action steps</h2>
+
+<%= form_with(url: user_default_user_action_steps_path(user.id), method: :post, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Action steps</th>
+        <th>Starts at</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="field">
+            <%= form.collection_select(:action_steps, ActionStep.all.order(:name), :id, :name, { include_blank: false }, { class: 'form-control', required: true, multiple: true }) %>
+          </div>
+        </td>
+        <td>
+          <div class="field">
+             <%= datepicker_input(form, :starting_at) %>
+          </div>
+        </td>
+
+        <td>
+          <div class="actions">
+            <%= form.submit class: 'btn btn-outline-primary' %>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<% if show_bottom_separator %><hr /><% end %>

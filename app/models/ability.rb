@@ -19,6 +19,7 @@ class Ability
 
   def admin
     can :manage, :all
+    can :create, DefaultUserActionStep
     can :administer_users, :all
     can :administer_action_steps, :all
     can :leaderboard, :all

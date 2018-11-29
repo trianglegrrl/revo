@@ -1,0 +1,35 @@
+<% if show_top_separator %><hr /><% end %>
+<% if !title.blank? %> <h3><%= title %></h3><% end %>
+
+<% if default_user_action_steps.count > 0 %>
+
+  <table class="table <%= table_class %>">
+    <thead>
+      <tr>
+        <th>Action steps</th>
+        <th class="d-flex mr-4">Starting at</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% default_user_action_steps.each do |d| %>
+        <tr>
+          <td>
+            <ul class="list-group">
+            <% d.action_step_ids.each do |id| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= ActionStep.find(id).name %>
+              </li>
+            <% end %>
+            </ul>
+          </td>
+          <td>
+            <span class="badge badge-primary badge-pill"><%= d.starting_at.strftime(date_format) %></span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h4>None</h4>
+<% end %>
+<% if show_bottom_separator %><hr /><% end %>

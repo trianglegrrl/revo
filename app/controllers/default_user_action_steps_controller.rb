@@ -8,10 +8,10 @@ class DefaultUserActionStepsController < ApplicationController
   def create
     authorize! :create, DefaultUserActionStep
 
-    asids = default_user_action_step_params[:action_step_id].reject(&:blank?).map(&:to_i)
+    asids = default_user_action_step_params[:action_steps].reject(&:blank?).map(&:to_i)
     starting_at = default_user_action_step_params[:starting_at]
 
-    DefaultUserActionStep.where(user: @user, action_step_ids: asids, starting_at: starting_at).first_or_create!
+    duas = DefaultUserActionStep.where(user: @user, action_step_ids: asids, starting_at: starting_at).first_or_create!
 
     respond_to do |format|
       format.html { redirect_to edit_user_path(@user), notice: 'Default action steps added.' }
@@ -46,6 +46,6 @@ class DefaultUserActionStepsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def default_user_action_step_params
-      params.permit(:user_id, :action_step_ids, :active_date)
+      params.permit(:user_id, :starting_at, :action_steps => [])
     end
 end

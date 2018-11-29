@@ -75,6 +75,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
 
       @user_action_steps = @user.user_action_steps
+      @default_user_action_steps = @user.default_user_action_steps
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
