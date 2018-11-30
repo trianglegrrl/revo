@@ -39,6 +39,8 @@ gem 'dotenv'
 
 gem 'cancancan', '~> 2.0'
 
+gem 'delayed_job_active_record'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
