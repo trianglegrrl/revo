@@ -14,22 +14,29 @@
 
 <div class="card-group">
   <% @user_action_steps.current.each do |user_action_step| %>
-  <div class="card mb-3 text-center bg-<%= user_action_step.open? ? "success" : "secondary" %>">
-      <div class="card-body">
-        <h5 css="card-title"><%= user_action_step.action_step.name %></h5>
-        <h1>
-        <% if user_action_step.open? %>
-           <%= link_to(user_user_action_step_complete_path(user_action_step.user, user_action_step), method: :put, class: 'btn open-step') do %>
-             <i class="fa fa-7x  fa-circle-o"></i>
-           <% end %>
-        <% else %>
-           <%= link_to(user_user_action_step_open_path(user_action_step.user, user_action_step), method: :put, class: 'btn closed-step') do %>
-             <i class="fa fa-lg fa-check-circle-o"></i>
-           <% end %>
-        <% end %>
-        </h1>
-      </div>
-    </div>
+    <% if user_action_step.open? %>
+      <%= link_to(user_user_action_step_complete_path(user_action_step.user, user_action_step), method: :put, class: 'btn open-step') do %>
+        <div class="card mb-3 text-center bg-<%= user_action_step.open? ? "success" : "secondary" %>">
+            <div class="card-body">
+              <h5 css="card-title"><%= user_action_step.action_step.name %></h5>
+              <h1>
+                   <i class="fa fa-7x  fa-circle-o"></i>
+              </h1>
+            </div>
+          </div>
+       <% end %>
+    <% else %>
+      <%= link_to(user_user_action_step_open_path(user_action_step.user, user_action_step), method: :put, class: 'btn closed-step') do %>
+        <div class="card mb-3 text-center bg-<%= user_action_step.open? ? "success" : "secondary" %>">
+          <div class="card-body">
+            <h5 css="card-title"><%= user_action_step.action_step.name %></h5>
+            <h1>
+                 <i class="fa fa-lg fa-check-circle-o"></i>
+            </h1>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 
