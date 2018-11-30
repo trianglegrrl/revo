@@ -3,7 +3,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Create schedulefor <%= user.full_name %></h5>
+					<h5 class="modal-title" id="exampleModalLabel">Create schedule for <%= user.full_name %></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -21,8 +21,8 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<%= form.submit class: 'btn btn-outline-primary' %>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<%= form.submit 'Save schedule', class: 'btn btn-primary' %>
 				</div>
 			</div>
 		</div>

@@ -56,32 +56,33 @@ RSpec.feature "Admin", type: :feature do
       expect(find('.user-list')).to have_text('Amanda DePanda')
     end
 
+		it "can add default action steps" do
+      visit "/users"
+
+      click_link("client client")
+
+			click_button("Schedule upcoming cards")
+
+      select("HICT", from: "action_steps[]")
+      fill_in('starting_at', with: 1.day.ago.strftime("%Y-%m-%d"))
+			click_button('Save schedule')
+
+			expect(find('.list-group-item')).to have_text('HICT')
+		end
+
     it "lets me add a current action step" do
       visit "/users"
 
       click_link("client client")
+			click_button("Add a card")
 
       select("HICT", from: "action_step_id[]")
       fill_in('active_date', with: 1.day.ago.strftime("%Y-%m-%d"))
       fill_in('expiration_date', with: 1.week.from_now.strftime("%Y-%m-%d"))
 
-      click_button("Save")
+      click_button("Save card")
 
       expect(find('.current')).to have_text('HICT')
-    end
-
-    it "lets me add a future action step" do
-      visit "/users"
-
-      click_link("client client")
-
-      select("HICT", from: "action_step_id[]")
-      fill_in('active_date', with: 1.week.from_now.strftime("%Y-%m-%d"))
-      fill_in('expiration_date', with: 2.weeks.from_now.strftime("%Y-%m-%d"))
-
-      click_button("Save")
-
-      expect(find('.future')).to have_text('HICT')
     end
 
     it "lets me add a past action step" do
@@ -93,7 +94,7 @@ RSpec.feature "Admin", type: :feature do
       fill_in('active_date', with: 3.weeks.ago.strftime("%Y-%m-%d"))
       fill_in('expiration_date', with: 2.weeks.ago.strftime("%Y-%m-%d"))
 
-      click_button("Save")
+      click_button("Save card")
 
       expect(find('.past')).to have_text('HICT')
     end

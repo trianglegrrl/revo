@@ -41,8 +41,12 @@
 
   <div class="row">
     <div class="col">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-action-step-modal">
+        Add a card
+      </button>
+
       <%= render('action_steps',
-                 title: "Current action steps",
+                 title: "This week's cards",
                  date_format: "%a, %b %e, %Y",
                  show_state: true,
                  table_class: 'current',
@@ -55,21 +59,7 @@
     </div>
     <div class="col">
       <%= render('action_steps',
-                 title: "Upcoming action steps",
-                 date_format: "%a, %b %e, %Y",
-                 show_state: false,
-                 table_class: 'future',
-                 show_active_expires: true,
-                 show_top_separator: false,
-                 show_bottom_separator: false,
-                 user_action_steps: @user_action_steps.future.order(created_at: :desc)
-                )
-      %>
-    </div>
-    <div class="col">
-
-      <%= render('action_steps',
-                 title: "Past action steps",
+                 title: "Old cards",
                  date_format: "%a, %b %e, %Y",
                  show_state: true,
                  table_class: 'table-dark past',
@@ -82,6 +72,12 @@
     </div>
   </div>
 </div>
+<%= render('action_step_add_form',
+					 title: nil,
+					 date_format: "%a, %b %e, %Y",
+					 user: @user
+					)
+%>
 <%= render('default_action_step_add_form',
 					 title: nil,
 					 date_format: "%a, %b %e, %Y",

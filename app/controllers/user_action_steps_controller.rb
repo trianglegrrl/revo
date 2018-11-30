@@ -1,7 +1,7 @@
 class UserActionStepsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :set_user_action_step, only: [:show, :edit, :update, :destroy, :complete, :open]
+  before_action :set_user_action_step, only: [:show, :edit, :update, :complete, :open]
 
   # GET /user_action_steps
   # GET /user_action_steps.json
@@ -37,7 +37,7 @@ class UserActionStepsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to edit_user_path(@user), notice: 'User action step was successfully created.' }
+      format.html { redirect_to edit_user_path(@user), notice: 'Card was successfully created.' }
       format.json { render :show, status: :created, location: @user_action_step }
     end
   rescue => e
@@ -65,10 +65,11 @@ class UserActionStepsController < ApplicationController
   # DELETE /user_action_steps/1
   # DELETE /user_action_steps/1.json
   def destroy
+    @user_action_step = UserActionStep.find(params[:id] || params[:user_action_step_id])
     authorize! :destroy, @user_action_step
     @user_action_step.destroy
     respond_to do |format|
-      format.html { redirect_to user_action_steps_url, notice: 'User action step was successfully destroyed.' }
+      format.html { redirect_to edit_user_path(@user), notice: 'Card was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

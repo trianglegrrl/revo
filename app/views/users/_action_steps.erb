@@ -6,12 +6,13 @@
   <table class="table <%= table_class %>">
     <thead>
       <tr>
-        <th>Action step</th>
+        <th>Card</th>
         <% if show_active_expires %>
           <th>Active</th>
           <th>Expires</th>
-      <% end %>
+        <% end %>
         <% if show_state %><th>State</th><% end %>
+          <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,11 @@
             <% end  %>
           </td>
         <% end %>
+        <td>
+						<%= link_to(user_user_action_step_path(@user, uas), method: :delete, data: { confirm: "Are you sure you want to delete this?" }) do %>
+							<i class="fa fa-ban"></i>
+						<% end %>
+        </td>
       </tr>
       <% end %>
     </tbody>

@@ -1,54 +1,36 @@
-<% if show_top_separator %><hr /><% end %>
-<h2>Add new action steps</h2>
-
 <%= form_with(url: user_user_action_steps_path(user), method: :post, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user_action_step from being saved:</h2>
+	<div class="modal fade" id="add-action-step-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Create card for <%= user.full_name %></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Action steps</th>
-        <th>Active date</th>
-        <th>Expiration date</th>
-        <th>&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <div class="field">
+				<div class="modal-body">
+					<div class="form-group">
+						<%= form.label 'action_step_id' %>
             <%= form.collection_select(:action_step_id, ActionStep.all.order(:name), :id, :name, { include_blank: false }, { class: 'form-control', required: true, multiple: true }) %>
-          </div>
-        </td>
-        <td>
-          <div class="field">
-             <%= datepicker_input(form, :active_date) %>
-          </div>
-        </td>
-        <td>
-            <div class="field">
-              <%= datepicker_input(form, :expiration_date) %>
-            </div>
-        </td>
-        <td>
-          <div class="actions">
-            <%= form.submit class: 'btn btn-outline-primary' %>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-<% end %>
+					</div>
 
-<% if show_bottom_separator %><hr /><% end %>
+					<div class="form-group">
+						<%= form.label 'active_date' %>
+						<%= datepicker_input(form, :active_date) %>
+					</div>
+
+					<div class="form-group">
+						<%= form.label 'expiration_date' %>
+						<%= datepicker_input(form, :expiration_date) %>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<%= form.submit "Save card", class: 'action-step-save btn btn-primary' %>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

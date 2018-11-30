@@ -51,6 +51,23 @@ class User < ApplicationRecord
     0
   end
 
+	def generate_new_user_action_steps!
+		duas = default_user_action_steps.current.first
+
+		starting_date = duas.starting_at
+		ending_date = duas.starting_at.end_of_week
+
+		duas[:action_step_ids].each do |asid|
+			UserActionStep.where(
+													user_id: id,
+													action_step_id: asid,
+													active_date: starting_date,
+													expiration_date: ending_date,
+													status: 'open'
+													).first_or_create!
+		end
+	end
+
   protected
 
     def confirmation_required?

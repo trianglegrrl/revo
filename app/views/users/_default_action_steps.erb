@@ -6,8 +6,9 @@
   <table class="table <%= table_class %>">
     <thead>
       <tr>
-        <th>Action steps</th>
+        <th>Cards</th>
         <th class="d-flex mr-4">Starting at</th>
+				<th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,11 @@
           <td>
             <span class="badge badge-primary badge-pill"><%= d.starting_at.strftime(date_format) %></span>
           </td>
+					<td>
+						<%= link_to(user_default_user_action_step_path(d.user, d), method: :delete, data: { confirm: "Are you sure you want to delete this?" }) do %>
+							<i class="fa fa-ban"></i>
+						<% end %>
+					</td>
         </tr>
       <% end %>
     </tbody>

@@ -28,6 +28,7 @@ class DefaultUserActionStepsController < ApplicationController
   # DELETE /default_user_action_steps/1.json
   def destroy
     authorize! :destroy, @default_user_action_step
+
     @default_user_action_step.destroy
     respond_to do |format|
       format.html { redirect_to edit_user_path(@user), notice: 'Deleted.' }
