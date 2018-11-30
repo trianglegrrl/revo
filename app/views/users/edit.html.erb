@@ -3,42 +3,42 @@
     <div class="col">
       <%= render 'form', user: @user %>
     </div>
-    <div class="col">
-      <%= render('action_step_add_form',
-                 title: nil,
-                 date_format: "%a, %b %e, %Y",
-                 show_top_separator: false,
-                 show_bottom_separator: false,
-                 user: @user
-                )
-      %>
-    </div>
   </div>
+
   <div class="row">
     <div class="col">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-default-action-step-modal">
+        Schedule upcoming cards
+      </button>
+
       <%= render('default_action_steps',
-                 title: "Default action steps",
+                 title: "Current schedule",
                  date_format: "%a, %b %e, %Y",
                  show_state: true,
                  table_class: 'default',
                  show_active_expires: true,
                  show_top_separator: false,
                  show_bottom_separator: false,
-                 default_user_action_steps: @default_user_action_steps.order(created_at: :desc)
+                 default_user_action_steps: @default_user_action_steps.current
+                )
+      %>
+
+      <%= render('default_action_steps',
+                 title: "Upcoming schedule",
+                 date_format: "%a, %b %e, %Y",
+                 show_state: true,
+                 table_class: 'default',
+                 show_active_expires: true,
+                 show_top_separator: false,
+                 show_bottom_separator: false,
+                 default_user_action_steps: @default_user_action_steps.future
                 )
       %>
     </div>
     <div class="col">
-      <%= render('default_action_step_add_form',
-                 title: nil,
-                 date_format: "%a, %b %e, %Y",
-                 show_top_separator: false,
-                 show_bottom_separator: false,
-                 user: @user
-                )
-      %>
     </div>
   </div>
+
   <div class="row">
     <div class="col">
       <%= render('action_steps',
@@ -82,3 +82,11 @@
     </div>
   </div>
 </div>
+<%= render('default_action_step_add_form',
+					 title: nil,
+					 date_format: "%a, %b %e, %Y",
+					 show_top_separator: false,
+					 show_bottom_separator: false,
+					 user: @user
+					)
+%>
