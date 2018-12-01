@@ -27,7 +27,7 @@ RSpec.feature "Admin", type: :feature do
       expect(page).to(have_text("check_in check_in"))
     end
 
-    it "lets me add a current action step" do
+    it "lets me edit a user" do
       visit "/users"
 
       click_link("client client")
@@ -39,7 +39,7 @@ RSpec.feature "Admin", type: :feature do
       click_button("Update User")
 
       expect(page).to have_text("Spackle Grackle")
-      expect(page).to have_text("spackle@grackle.com")
+      expect(page).to have_field("user[email]", with: "spackle@grackle.com")
     end
 
     it "can add a user" do
