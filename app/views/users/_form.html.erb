@@ -31,12 +31,14 @@
       <%= form.label :password %>
       <%= form.password_field :password, class: 'form-control' %>
     </div>
-  </div>
 
-  <div class="row form-group">
     <div class="col-md-6 mb-3">
-      <%= form.label :password_confirmation %>
+      <%= form.label :password_confirmation, "Confirm" %>
       <%= form.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+		<div class="col-md-12">
+      <button id="generate-password-button" type="button" class="btn btn-warning">Generate password</button>
+      <div class="muted text-monospace" id="generated-password"></div>
     </div>
   </div>
 
