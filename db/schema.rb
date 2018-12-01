@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_184330) do
+ActiveRecord::Schema.define(version: 2018_12_01_003611) do
 
   create_table "action_steps", force: :cascade do |t|
     t.string "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_184330) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "completed_at"
     t.index ["action_step_id"], name: "index_user_action_steps_on_action_step_id"
     t.index ["user_id"], name: "index_user_action_steps_on_user_id"
   end
@@ -88,6 +89,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_184330) do
     t.boolean "check_in", default: false
     t.boolean "leaderboard", default: false
     t.boolean "client", default: false
+    t.datetime "completed_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["first_name"], name: "index_users_on_first_name"

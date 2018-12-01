@@ -38,12 +38,18 @@ class UserActionStep < ApplicationRecord
     state :open, initial: true
     state :completed
 
-    event :complete do
+    event :complete, after_commit: :update_completed_at do
       transitions(from: :open, to: :completed)
     end
 
     event :open do
       transitions(from: :completed, to: :open)
     end
+  end
+
+  private
+
+  def update_completed_at
+    update_attributes! completed_at: Time.now
   end
 end

@@ -12,6 +12,7 @@
           <th>Expires</th>
         <% end %>
         <% if show_state %><th>State</th><% end %>
+        <% if show_completed %><th>Completed</th><% end %>
           <th>Action</th>
       </tr>
     </thead>
@@ -32,6 +33,7 @@
             <% end  %>
           </td>
         <% end %>
+        <% if show_completed %><td><%= uas.completed_at.try(:strftime, "%D") if uas.completed? %></td><% end %>
         <td>
 						<%= link_to(user_user_action_step_path(@user, uas), method: :delete, data: { confirm: "Are you sure you want to delete this?" }) do %>
 							<i class="fa fa-ban"></i>
