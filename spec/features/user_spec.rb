@@ -49,7 +49,7 @@ RSpec.feature "Admin", type: :feature do
       fill_in('Last name', with: 'DePanda')
       fill_in('Email', with: 'amandadepanda@gmail.com')
       fill_in('Password', with: 'abc123')
-      fill_in('Password confirmation', with: 'abc123')
+      fill_in('Confirm', with: 'abc123')
 
       click_button("Create User")
 

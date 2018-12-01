@@ -35,6 +35,8 @@ gem 'devise'
 
 gem 'devise-two-factor'
 
+gem 'devise_fido_usf'
+
 gem 'dotenv'
 
 gem 'cancancan', '~> 2.0'
@@ -77,6 +79,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'nested_scaffold'
   gem 'pry'
+  gem 'thin'
 end
 
 group :test do

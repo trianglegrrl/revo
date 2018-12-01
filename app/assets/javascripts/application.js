@@ -17,4 +17,5 @@
 //= require popper
 //= require bootstrap
 //= require bootstrap-datepicker
+//= require u2f-api
 //= require_tree .

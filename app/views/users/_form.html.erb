@@ -76,9 +76,22 @@
     </div>
   </div>
 
+  <% if @user.id == current_user.id %>
+    <div class="row form-group">
+      <h5>U2F 2fa Keys</h5>
+      <% if @user.fido_usf_devices.count > 0 %>
+        <%= render partial: 'devise/fido_usf_registrations/devices' %>
+      <% else %>
+        <div class="col">No keys configured.</div>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="row form-group">
     <div class="col-md-6 mb-3">
       <%= form.submit class: 'btn btn-outline-primary' %>
     </div>
   </div>
+
+
 <% end %>

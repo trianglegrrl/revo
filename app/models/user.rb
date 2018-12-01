@@ -4,7 +4,9 @@ class User < ApplicationRecord
          :rememberable,
          :validatable,
          :lockable,
-         :trackable
+         :trackable,
+         :fido_usf_registerable,
+         :fido_usf_authenticatable
 
   has_many :user_action_steps
   has_many :default_user_action_steps

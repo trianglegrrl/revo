@@ -76,6 +76,7 @@ class UsersController < ApplicationController
 
       @user_action_steps = @user.user_action_steps
       @default_user_action_steps = @user.default_user_action_steps
+      @devices = @user.fido_usf_devices
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

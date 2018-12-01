@@ -26,38 +26,43 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-                        <% if user_signed_in? and can?(:administer_action_steps, :all) %>
-                          <li class="nav-item">
-                            <a class="nav-link" href="/action_steps">Manage Action Steps</a>
-                          </li>
-                        <% end %>
-                        <% if user_signed_in? and can?(:administer_users, :all) %>
-                          <li class="nav-item">
-                            <a class="nav-link" href="/users">Manage Users</a>
-                          </li>
-                        <% end %>
-                        <% if user_signed_in? and can?(:leaderboard, :all) %>
-                          <li class="nav-item">
-                            <a class="nav-link" href="/leaderboard">Leaderboard</a>
-                          </li>
-                        <% end %>
-                        <% if user_signed_in? and can?(:check_in, :all) %>
-                          <li class="nav-item">
-                            <a class="nav-link" href="/check_in">Check in</a>
-                          </li>
-                        <% end %>
+        <div class="collapse navbar-collapse pull-right justify-content-end" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto justify-content-end">
+            <% if user_signed_in? and can?(:administer_action_steps, :all) %>
+              <li class="nav-item">
+                <a class="nav-link" href="/action_steps">Manage Action Steps</a>
+              </li>
+            <% end %>
+            <% if user_signed_in? and can?(:administer_users, :all) %>
+              <li class="nav-item">
+                <a class="nav-link" href="/users">Manage Users</a>
+              </li>
+            <% end %>
+            <% if user_signed_in? and can?(:leaderboard, :all) %>
+              <li class="nav-item">
+                <a class="nav-link" href="/leaderboard">Leaderboard</a>
+              </li>
+            <% end %>
+            <% if user_signed_in? and can?(:check_in, :all) %>
+              <li class="nav-item">
+                <a class="nav-link" href="/check_in">Check in</a>
+              </li>
+            <% end %>
+            <li class="nav-item dropdown">
+							<% if user_signed_in? and can?(:show_login_header, :all)%>
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %></a>
+							<div class="dropdown-menu">
+									<%= link_to "Configure 2fa", user_fido_usf_registration_path, class: 'navbar-link dropdown-item'  %>
+									<div class="dropdown-divider"></div>
+									<%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link dropdown-item'  %>
+							</div>
+						</li>
+							<% elsif !user_signed_in? %>
+								<%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+							<% end %>
+						</li>
           </ul>
 
-          <p class="navbar-text pull-right">
-            <% if user_signed_in? and can?(:show_login_header, :all)%>
-              Logged in as <strong><%= current_user.email %></strong>.
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-            <% elsif !user_signed_in? %>
-              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-            <% end %>
-          </p>
         </div>
       </nav>
     </header>
