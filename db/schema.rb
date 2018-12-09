@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_01_165110) do
+ActiveRecord::Schema.define(version: 2018_12_09_153240) do
 
   create_table "action_steps", force: :cascade do |t|
     t.string "name"
@@ -57,6 +57,29 @@ ActiveRecord::Schema.define(version: 2018_12_01_165110) do
     t.index ["key_handle"], name: "index_fido_usf_devices_on_key_handle"
     t.index ["last_authenticated_at"], name: "index_fido_usf_devices_on_last_authenticated_at"
     t.index ["user_type", "user_id"], name: "index_fido_usf_devices_on_user_type_and_user_id"
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "serving_type"
+    t.float "carbs"
+    t.float "fat"
+    t.float "protein"
+    t.float "calories"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meal_items", force: :cascade do |t|
+    t.integer "food_id"
+    t.integer "user_id"
+    t.float "servings"
+    t.datetime "eaten_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id"], name: "index_meal_items_on_food_id"
+    t.index ["user_id"], name: "index_meal_items_on_user_id"
   end
 
   create_table "user_action_steps", force: :cascade do |t|

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :meal_items
+  resources :foods
   devise_for :users
   devise_scope :user do
         authenticated :user do
